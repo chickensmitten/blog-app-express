@@ -1,9 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const postRoutes = require('./routes/post');
 
 const app = express();
-const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}.${process.env.MONGO_DATABASE}.mongodb.net/?retryWrites=true&w=majority`;
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}.${process.env.MONGO_DATABASE}.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`;
 mongoose.set('strictQuery', false);
 
 const connection = mongoose.connection;
@@ -19,6 +20,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/', (req, res) => {
   res.send('Hello, ExpressJS!');
 });
+
+app.use(postRoutes);
 
 mongoose
   .connect(MONGODB_URI)
