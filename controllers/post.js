@@ -21,7 +21,7 @@ exports.getPost = async (req, res, next) => {
   }
 };
 
-exports.newPost = async (req, res, next) => {
+exports.createPost = async (req, res, next) => {
   const post = new Post({
     title: req.body.title,
     content: req.body.content
@@ -31,18 +31,6 @@ exports.newPost = async (req, res, next) => {
     res.status(201).json(savedPost);
   } catch (err) {
     res.status(400).json({ message: err });
-  }
-};
-
-exports.editPost = async (req, res, next) => {
-  try {
-    const post = await Post.findById(req.params.postId);
-    if (!post) {
-        return res.status(404).json({ message: 'Post not found' });
-    }
-    res.json(post);
-  } catch (err) {
-    res.status(500).json({ message: err });
   }
 };
 
