@@ -8,7 +8,7 @@ router.get('/posts/', postController.getPosts);
 
 router.get('/posts/:postId', postController.getPost);
 
-router.post('/posts/:postId/create', postController.createPost);
+router.post('/posts/create', postController.createPost);
 
 router.post('/posts/:postId/update', postController.updatePost);
 
